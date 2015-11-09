@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,10 +47,10 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,8 +74,10 @@ CREATE TABLE `item` (
   `Product_id` int(11) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `Order_id` int(11) DEFAULT NULL,
-  KEY `Order_id` (`Order_id`),
-  CONSTRAINT `Item_ibfk_1` FOREIGN KEY (`Order_id`) REFERENCES `ordertable` (`id`)
+  KEY `fk_perProd_idx` (`Product_id`),
+  KEY `fk_perOrder_idx` (`Order_id`),
+  CONSTRAINT `fk_perOrder` FOREIGN KEY (`Order_id`) REFERENCES `ordertable` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_perProd` FOREIGN KEY (`Product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,13 +99,13 @@ DROP TABLE IF EXISTS `ordertable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordertable` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Customer_id` int(11) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_perCustomer` (`Customer_id`),
-  CONSTRAINT `fk_perCustomer` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_perCust_idx` (`Customer_id`),
+  CONSTRAINT `fk_perCust` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,14 +126,14 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(20) DEFAULT NULL,
   `Price` decimal(10,0) DEFAULT NULL,
   `Category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_perCategory` (`Category_id`),
-  CONSTRAINT `fk_perCategory` FOREIGN KEY (`Category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_perCategor_idx` (`Category_id`),
+  CONSTRAINT `fk_perCategor` FOREIGN KEY (`Category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-09 21:44:47
+-- Dump completed on 2015-11-09 22:13:16
