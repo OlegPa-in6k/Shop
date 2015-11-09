@@ -50,7 +50,7 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'John'),(2,'Jack'),(3,'Anna'),(4,'Tony'),(5,'Stive');
+INSERT INTO `customer` VALUES (1,'John'),(2,'Jack'),(3,'Anna'),(4,'Tony'),(5,'Stive'),(6,'Oleg'),(7,'Stepan');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(20) DEFAULT NULL,
-  `Price` decimal(10,0) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL,
   `Category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_perCategor_idx` (`Category_id`),
@@ -142,7 +142,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Sprite',10,1),(2,'Coca-cola',10,1),(3,'Fanta',10,1),(4,'Pepsi',10,1),(5,'Zhuvchik',11,1),(6,'Apple',3,2),(7,'Mango',4,2),(8,'Pear',5,2),(9,'Cherry',6,2),(10,'PineApple',10,2),(11,'Potato',1,3),(12,'Tomato',2,3),(13,'Cabbage',4,3),(14,'Onion',1,3),(15,'Garlic',1,3),(16,'Lipton',12,4),(17,'Tess',16,4),(18,'Princess Nury',10,4),(19,'Tseilon',10,4),(20,'Milk',8,5),(21,'Cheese',8,5),(22,'Cottage cheese',8,5),(23,'Yogurt',20,5);
+INSERT INTO `product` VALUES (1,'Sprite',10.00,1),(2,'Coca-cola',10.00,1),(3,'Fanta',10.00,1),(4,'Pepsi',10.00,1),(5,'Zhuvchik',11.00,1),(6,'Apple',3.00,2),(7,'Mango',4.00,2),(8,'Pear',5.00,2),(9,'Cherry',6.00,2),(10,'PineApple',10.00,2),(11,'Potato',1.00,3),(12,'Tomato',2.00,3),(13,'Cabbage',4.00,3),(14,'Onion',1.00,3),(15,'Garlic',1.00,3),(16,'Lipton',12.00,4),(17,'Tess',16.00,4),(18,'Princess Nury',10.00,4),(19,'Tseilon',10.00,4),(20,'Milk',8.00,5),(21,'Cheese',8.00,5),(22,'Cottage cheese',8.00,5),(23,'Yogurt',20.00,5);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -155,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-09 22:13:16
+-- Dump completed on 2015-11-09 23:45:25
