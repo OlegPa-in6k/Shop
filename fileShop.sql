@@ -74,6 +74,7 @@ CREATE TABLE `item` (
   `Product_id` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `Order_id` int(11) NOT NULL,
+  PRIMARY KEY (`Order_id`,`Product_id`),
   KEY `fk_perProd_idx` (`Product_id`),
   KEY `fk_perOrder_idx` (`Order_id`),
   CONSTRAINT `fk_perOrder` FOREIGN KEY (`Order_id`) REFERENCES `ordertable` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -87,7 +88,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,2,1),(4,2,1),(20,10,2),(1,2,2);
+INSERT INTO `item` VALUES (1,2,1),(4,2,1),(1,2,2),(20,10,2);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,4 +567,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-10 13:36:27
+-- Dump completed on 2015-11-10 14:04:49
