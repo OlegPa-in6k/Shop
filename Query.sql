@@ -57,9 +57,6 @@ GROUP BY i.Product_id
 ORDER BY sum(i.Quantity) desc
 LIMIT 3;
 END//
-
-
-
  
 
 CREATE PROCEDURE `getMonthPopularProduct`(IN paramYear INT, IN paramMonth INT)
@@ -75,14 +72,17 @@ LIMIT 1;
 
 CREATE PROCEDURE `getTotalCostOfOrder` (IN orderId INT)
 BEGIN
-SELECT o.id, sum(p.Price * i.Quantity*1.1) as summ WHERE 
+SELECT o.id, sum(p.Price * i.Quantity*1.1) as summ from product p, item i, ordertable o
+where (p.id=i.Product_id) and ( i.Order_id = o.id) and (o.id = orderId);
+END //
 
-select o.id, o.date, sum(p.price*oP.QuantityProduct) as summm
-from orders o, product p, orderProducts oP
-where  (p.id = oP.idProduct) and (o.id = oP.idOrder) and (o.id=paramIdOrder);    
-END//
+CREATE PROCEDURE `getTopProductInAllCategory`()
+BEGIN
+SELECT * FROM (Select c.Title as category, p.Title as product, sum(i.Quantity) as totalQuantity from item i, product p, category c WHERE ( i.Product_id = p.id) AND (c.id=p.Category_id) Group by i.Product_id ORDER BY totalQuantity DESC) A GROUP BY category;
+END //
 
-select c.Title, p.Title from category c, product p, item i, ordertable o WHERE 
+
+
 
 
 
