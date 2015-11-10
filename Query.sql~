@@ -41,4 +41,10 @@ BEGIN
 select * from customer c, ordertable o WHERE (c.id=o.Customer_id) AND (c.Name = paramCustomer);
 END //
 
+create procedure `getItemsByOrder` (IN paramOrderId INT)
+MODIFIES SQL DATA
+BEGIN
+select o.id ,p.Title, i.Quantity  from item i, ordertable o, product p WHERE (o.id = paramOrderId) AND ( o.id=i.Order_id) AND (p.id=i.Product_id);
+END //
+
 
