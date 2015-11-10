@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: Shop
 -- ------------------------------------------------------
--- Server version	5.7.9-log
+-- Server version	5.5.44-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` varchar(20) DEFAULT NULL,
+  `Title` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Water'),(2,'Fruits'),(3,'Vegetables'),(4,'Tea'),(5,'Milk Products');
+INSERT INTO `category` VALUES (1,'Water'),(2,'Fruits'),(3,'Vegetables'),(4,'Tea'),(5,'Milk Products'),(6,'Meat');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,9 +48,9 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(10) DEFAULT NULL,
+  `Name` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'John'),(2,'Jack'),(3,'Anna'),(4,'Tony'),(5,'Stive'),(6,'Oleg'),(7,'Stepan'),(8,'Max');
+INSERT INTO `customer` VALUES (1,'John'),(2,'Jack'),(3,'Anna'),(4,'Tony'),(5,'Stive'),(6,'Oleg'),(7,'Stepan'),(8,'Max'),(9,'Petro');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,9 +71,9 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
-  `Product_id` int(11) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
-  `Order_id` int(11) DEFAULT NULL,
+  `Product_id` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Order_id` int(11) NOT NULL,
   KEY `fk_perProd_idx` (`Product_id`),
   KEY `fk_perOrder_idx` (`Order_id`),
   CONSTRAINT `fk_perOrder` FOREIGN KEY (`Order_id`) REFERENCES `ordertable` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -100,8 +100,8 @@ DROP TABLE IF EXISTS `ordertable`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordertable` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Customer_id` int(11) DEFAULT NULL,
-  `Date` date DEFAULT NULL,
+  `Customer_id` int(11) NOT NULL,
+  `Date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_perCust_idx` (`Customer_id`),
   CONSTRAINT `fk_perCust` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -127,9 +127,9 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` varchar(20) DEFAULT NULL,
-  `Price` decimal(10,2) DEFAULT NULL,
-  `Category_id` int(11) DEFAULT NULL,
+  `Title` varchar(20) NOT NULL,
+  `Price` decimal(10,2) NOT NULL,
+  `Category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_perCategor_idx` (`Category_id`),
   CONSTRAINT `fk_perCategor` FOREIGN KEY (`Category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -155,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-10  0:38:37
+-- Dump completed on 2015-11-10  9:50:38
